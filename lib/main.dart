@@ -1,4 +1,21 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'pages/animated_container_page.dart';
+import 'pages/animated_opacity_page.dart';
+import 'pages/tween_animation_builder_page.dart';
+
+enum AnimationExample {
+  animatedContainer,
+  animatedOpacity,
+  tweenAnimationBuilder,
+}
+
+extension on AnimationExample {
+  String capitalizeFirstCharacter() {
+    final name = describeEnum(this);
+    return name.replaceRange(0, 1, name.characters.first.toUpperCase());
+  }
+}
 
 void main() {
   runApp(const MyApp());
@@ -11,57 +28,46 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.indigo,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Scaffold(
+        appBar: AppBar(title: const Text('Animations Playground')),
+        body: const AnimationExamplesList(),
+      ),
+      onGenerateRoute: (settings) {
+        switch (settings.name) {
+          case 'animatedContainer':
+            return MaterialPageRoute(builder: (_) => const AnimatedContainerPage());
+          case 'animatedOpacity':
+            return MaterialPageRoute(builder: (_) => const AnimatedOpacityPage());
+          case 'tweenAnimationBuilder':
+            return MaterialPageRoute(builder: (_) => const TweenAnimationBuilderPage());
+          default:
+            throw UnimplementedError('Route ${settings.name} not implemented');
+        }
+      },
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class AnimationExamplesList extends StatelessWidget {
+  const AnimationExamplesList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        final example = AnimationExample.values[index];
+        final routeName = describeEnum(example);
+        return ListTile(
+          title: Text(example.capitalizeFirstCharacter()),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => Navigator.of(context).pushNamed(routeName),
+        );
+      },
+      itemCount: AnimationExample.values.length,
     );
   }
 }
