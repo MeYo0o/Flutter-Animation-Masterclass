@@ -39,13 +39,17 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case 'animatedContainer':
-            return MaterialPageRoute(builder: (_) => const AnimatedContainerPage());
+            return MaterialPageRoute(
+                builder: (_) => const AnimatedContainerPage());
           case 'animatedOpacity':
-            return MaterialPageRoute(builder: (_) => const AnimatedOpacityPage());
+            return MaterialPageRoute(
+                builder: (_) => const AnimatedOpacityPage());
           case 'tweenAnimationBuilder':
-            return MaterialPageRoute(builder: (_) => const TweenAnimationBuilderPage());
+            return MaterialPageRoute(
+                builder: (_) => const TweenAnimationBuilderPage());
           default:
-            throw UnimplementedError('Route ${settings.name} not implemented');
+            throw UnimplementedError(
+                'Route ${settings.name} not implemented');
         }
       },
     );
@@ -61,6 +65,7 @@ class AnimationExamplesList extends StatelessWidget {
       itemBuilder: (context, index) {
         final example = AnimationExample.values[index];
         final routeName = describeEnum(example);
+        debugPrint(routeName);
         return ListTile(
           title: Text(example.capitalizeFirstCharacter()),
           trailing: const Icon(Icons.chevron_right),

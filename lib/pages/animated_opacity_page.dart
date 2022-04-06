@@ -42,11 +42,6 @@ class AnimatedOpacityPage extends StatefulWidget {
 
 class AnimatedOpacityPageState extends State<AnimatedOpacityPage> {
   double _opacity = 1.0;
-
-  void _changeOpacity() {
-    setState(() => _opacity = _opacity == 0 ? 1.0 : 0.0);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,18 +53,32 @@ class AnimatedOpacityPageState extends State<AnimatedOpacityPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AnimatedOpacity(
+              duration: const Duration(milliseconds: 300),
               opacity: _opacity,
-              duration: const Duration(seconds: 1),
-              curve: Curves.fastOutSlowIn,
-              child: const FlutterLogo(size: 200),
+              curve: Curves.easeIn,
+              child: Column(
+                children: const [
+                  FlutterLogo(size: 100),
+                  SizedBox(height: 20),
+                  Text('Now you see me, now you don\'t!'),
+                ],
+              ),
             ),
+            const SizedBox(height: 50),
             ElevatedButton(
-              child: const Text('Fade Logo'),
-              onPressed: _changeOpacity,
+              onPressed: _toggleOpacity,
+              child: const Text('Toggle '
+                  'Opacity'),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void _toggleOpacity() {
+    setState(() {
+      _opacity = _opacity == 1.0 ? 0.0 : 1.0;
+    });
   }
 }
