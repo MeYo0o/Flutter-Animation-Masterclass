@@ -1,73 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animations_masterclass/pages/ep11_to_ep/reset_button.dart';
-import 'package:flutter_animations_masterclass/pages/ep11_to_ep/start_stop_button.dart';
-import 'package:flutter_animations_masterclass/pages/ep11_to_ep/stopwatch_renderer.dart';
-import 'package:flutter_animations_masterclass/pages/ep11_to_ep/stopwatch_ticker_ui.dart';
+import 'package:flutter_animations_masterclass/pages/ep11_to_ep/elapsed_time_text_basic.dart';
 
 class MeYoStopWatch extends StatefulWidget {
+  const MeYoStopWatch({Key? key}) : super(key: key);
+
   @override
-  _MeYoStopWatchState createState() => _MeYoStopWatchState();
+  State<MeYoStopWatch> createState() => _MeYoStopWatchState();
 }
 
 class _MeYoStopWatchState extends State<MeYoStopWatch> {
-  /// Global key used to manipulate the state of the StopwatchTickerUI
-  final _tickerUIKey = GlobalKey<StopwatchTickerUIState>();
-  bool _isRunning = false;
-
-  void _toggleRunning() {
-    setState(() {
-      _isRunning = !_isRunning;
-    });
-    _tickerUIKey.currentState?.toggleRunning(_isRunning);
-  }
-
-  void _reset() {
-    setState(() {
-      _isRunning = false;
-    });
-    _tickerUIKey.currentState?.reset();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final radius = constraints.maxWidth / 2;
-        return Stack(
-          children: [
-            // non-ticker dependent UI
-            StopwatchRenderer(radius: radius),
-            // ticker dependent UI
-            StopwatchTickerUI(
-              key: _tickerUIKey,
-              radius: radius,
-            ),
-            // reset button
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: SizedBox(
-                width: 80,
-                height: 80,
-                child: ResetButton(
-                  onPressed: _reset,
-                ),
-              ),
-            ),
-            // start/stop button
-            Align(
-              alignment: Alignment.bottomRight,
-              child: SizedBox(
-                width: 80,
-                height: 80,
-                child: StartStopButton(
-                  isRunning: _isRunning,
-                  onPressed: _toggleRunning,
-                ),
-              ),
-            ),
-          ],
-        );
-      },
+    return const ElapsedTimeTextBasic(
+      elapsed: Duration(seconds: 5),
     );
   }
 }
