@@ -78,6 +78,7 @@
 // }
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animations_masterclass/pages/ep11_to_ep/stopwatch.dart';
 
 void main() {
@@ -104,9 +105,12 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: MeYoStopWatch(),
+    return const AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light,
+      child: Scaffold(
+        body: Center(
+          child: MeYoStopWatch(),
+        ),
       ),
     );
   }
