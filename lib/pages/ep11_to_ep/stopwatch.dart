@@ -1,4 +1,4 @@
-import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -26,7 +26,7 @@ class _MeYoStopWatchState extends State<MeYoStopWatch> with SingleTickerProvider
     });
 
     //Tickers have to be started explicitly
-    // _ticker.start();
+    _ticker.start();
   }
 
   @override
@@ -39,12 +39,18 @@ class _MeYoStopWatchState extends State<MeYoStopWatch> with SingleTickerProvider
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          color: Colors.indigo,
+        Transform(
+          transform: Matrix4.identity()
+            ..translate(50.0, 0.0, 0.0)
+            ..rotateZ(pi / 4),
+          // transform: Matrix4.translationValues(50.0, 0, 0) * Matrix4.rotationZ(pi / 4),
+          child: Container(
+            color: Colors.indigo,
+          ),
         ),
-        StopwatchRenderer(
-          elapsedTime: _elapsed,
-        ),
+        // StopwatchRenderer(
+        //   elapsedTime: _elapsed,
+        // ),
       ],
     );
   }
