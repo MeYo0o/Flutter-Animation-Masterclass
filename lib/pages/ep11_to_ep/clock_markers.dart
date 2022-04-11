@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -27,6 +28,45 @@ class ClockSecondsTickMarker extends StatelessWidget {
         height: height,
         width: width,
         color: color,
+      ),
+    );
+  }
+}
+
+class ClockTextMarker extends StatelessWidget {
+  const ClockTextMarker({
+    Key? key,
+    required this.value,
+    required this.maxValue,
+    required this.radius,
+  }) : super(key: key);
+
+  final int value;
+  final int maxValue;
+  final double radius;
+
+  @override
+  Widget build(BuildContext context) {
+    const height = 30.0;
+    const width = 40.0;
+    return Transform(
+      alignment: Alignment.center,
+      transform: Matrix4.identity()
+        ..translate(-width / 2, -height / 2, 0.0)
+        ..rotateZ(pi + 2 * pi * (value / maxValue))
+        ..translate(0.0, radius - 35, 0.0)
+        ..rotateZ(pi - 2 * pi * (value / maxValue)),
+      child: SizedBox(
+        height: height,
+        width: width,
+        child: Text(
+          value.toString(),
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            fontSize: 24,
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }
