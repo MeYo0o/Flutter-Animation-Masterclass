@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animations_masterclass/pages/ep11_to_ep/elapsed_time_text.dart';
+import 'package:flutter_animations_masterclass/pages/ep11_to_ep/stop_watch_renderer.dart';
 
 class MeYoStopWatch extends StatefulWidget {
   const MeYoStopWatch({Key? key}) : super(key: key);
@@ -25,7 +26,7 @@ class _MeYoStopWatchState extends State<MeYoStopWatch> with SingleTickerProvider
     });
 
     //Tickers have to be started explicitly
-    _ticker.start();
+    // _ticker.start();
   }
 
   @override
@@ -36,8 +37,15 @@ class _MeYoStopWatchState extends State<MeYoStopWatch> with SingleTickerProvider
 
   @override
   Widget build(BuildContext context) {
-    return ElapsedTimeText(
-      elapsed: _elapsed,
+    return Stack(
+      children: [
+        Container(
+          color: Colors.indigo,
+        ),
+        StopwatchRenderer(
+          elapsedTime: _elapsed,
+        ),
+      ],
     );
   }
 }
