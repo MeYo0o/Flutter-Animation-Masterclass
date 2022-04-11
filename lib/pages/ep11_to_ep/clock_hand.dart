@@ -15,6 +15,16 @@ class ClockHand extends StatelessWidget {
   final Color color;
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Transform(
+      alignment: Alignment.topCenter,
+      transform: Matrix4.identity()
+        ..translate(-handThickness / 2, 0.0, 0.0)
+        ..rotateZ(rotationZAngle),
+      child: Container(
+        height: handLength,
+        width: handThickness,
+        color: color,
+      ),
+    );
   }
 }

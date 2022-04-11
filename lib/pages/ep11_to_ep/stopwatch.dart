@@ -37,10 +37,10 @@ class _MeYoStopWatchState extends State<MeYoStopWatch>
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constrains) {
-        final radius = constrains.maxWidth / 2;
+        // final radius = constrains.maxWidth / 2;
         return StopwatchRenderer(
           elapsedTime: _elapsed,
-          radius: radius,
+          radius: constrains.maxWidth / 2,
         );
       },
     );
