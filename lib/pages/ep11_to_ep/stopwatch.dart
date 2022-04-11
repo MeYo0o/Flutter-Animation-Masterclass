@@ -14,25 +14,50 @@ class MeYoStopWatch extends StatefulWidget {
 class _MeYoStopWatchState extends State<MeYoStopWatch>
     with SingleTickerProviderStateMixin {
   late Ticker _ticker;
-  Duration _elapsed = Duration.zero;
+  bool _isRunning = false;
+  Duration _currentTime = Duration.zero;
+  Duration _previousTime = Duration.zero;
+  Duration get _elapsedTime => _previousTime + _currentTime;
 
   @override
   void initState() {
     super.initState();
     _ticker = createTicker((elapsed) {
       setState(() {
-        _elapsed = elapsed;
+        _currentTime = elapsed;
       });
     });
 
-    //Tickers have to be started explicitly
-    _ticker.start();
+    //Tickers have to be started explicitly -- stopped by default.
+    // _ticker.start();
   }
 
   @override
   void dispose() {
     _ticker.dispose();
     super.dispose();
+  }
+
+  void _toggleRunning() {
+    setState(() {
+      _isRunning = !_isRunning;
+      if (_isRunning) {
+        _ticker.start();
+      } else if (!_isRunning) {
+        _ticker.stop();
+        _previousTime += _currentTime;
+        _currentTime = Duration.zero;
+      }
+    });
+  }
+
+  void _reset() {
+    _ticker.stop();
+    setState(() {
+      _isRunning = false;
+      _previousTime = Duration.zero;
+      _currentTime = Duration.zero;
+    });
   }
 
   @override
@@ -43,7 +68,7 @@ class _MeYoStopWatchState extends State<MeYoStopWatch>
         return Stack(
           children: [
             StopwatchRenderer(
-              elapsedTime: _elapsed,
+              elapsedTime: _elapsedTime,
               radius: constrains.maxWidth / 2,
             ),
             Align(
@@ -52,7 +77,7 @@ class _MeYoStopWatchState extends State<MeYoStopWatch>
                 height: 80,
                 width: 80,
                 child: ResetButton(
-                  onPressed: () {},
+                  onPressed: _reset,
                 ),
               ),
             ),
@@ -62,8 +87,8 @@ class _MeYoStopWatchState extends State<MeYoStopWatch>
                 height: 80,
                 width: 80,
                 child: StartStopButton(
-                  isRunning: true,
-                  onPressed: () {},
+                  isRunning: _isRunning,
+                  onPressed: _toggleRunning,
                 ),
               ),
             ),
