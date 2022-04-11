@@ -109,7 +109,13 @@ class MyHomePage extends StatelessWidget {
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
         body: Center(
-          child: MeYoStopWatch(),
+          child: Padding(
+            padding: EdgeInsets.all(32),
+            child: AspectRatio(
+              aspectRatio: 1 / 1,
+              child: MeYoStopWatch(),
+            ),
+          ),
         ),
       ),
     );
