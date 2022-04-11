@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_animations_masterclass/pages/ep11_to_ep/elapsed_time_text.dart';
 import 'package:flutter_animations_masterclass/pages/ep11_to_ep/stop_watch_renderer.dart';
 
 class MeYoStopWatch extends StatefulWidget {
@@ -12,7 +9,8 @@ class MeYoStopWatch extends StatefulWidget {
   State<MeYoStopWatch> createState() => _MeYoStopWatchState();
 }
 
-class _MeYoStopWatchState extends State<MeYoStopWatch> with SingleTickerProviderStateMixin {
+class _MeYoStopWatchState extends State<MeYoStopWatch>
+    with SingleTickerProviderStateMixin {
   late Ticker _ticker;
   Duration _elapsed = Duration.zero;
 
@@ -37,21 +35,14 @@ class _MeYoStopWatchState extends State<MeYoStopWatch> with SingleTickerProvider
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Transform(
-          transform: Matrix4.identity()
-            ..translate(50.0, 0.0, 0.0)
-            ..rotateZ(pi / 4),
-          // transform: Matrix4.translationValues(50.0, 0, 0) * Matrix4.rotationZ(pi / 4),
-          child: Container(
-            color: Colors.indigo,
-          ),
-        ),
-        // StopwatchRenderer(
-        //   elapsedTime: _elapsed,
-        // ),
-      ],
+    return LayoutBuilder(
+      builder: (context, constrains) {
+        final radius = constrains.maxWidth / 2;
+        return StopwatchRenderer(
+          elapsedTime: _elapsed,
+          radius: radius,
+        );
+      },
     );
   }
 }
