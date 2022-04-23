@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_animations_masterclass/pages/ep11_to_ep/clock_hand.dart';
-import 'package:flutter_animations_masterclass/pages/ep11_to_ep/elapsed_time_text.dart';
+import 'package:flutter_animations_masterclass/pages/ep11_to_ep24/clock_hand.dart';
+import 'package:flutter_animations_masterclass/pages/ep11_to_ep24/elapsed_time_text.dart';
 
 import 'clock_markers.dart';
 
@@ -38,8 +38,7 @@ class StopwatchRenderer extends StatelessWidget {
           child: ClockHand(
             handLength: radius,
             handThickness: 2,
-            rotationZAngle:
-                pi + (2 * pi / 60000) * elapsedTime.inMilliseconds,
+            rotationZAngle: pi + (2 * pi / 60000) * elapsedTime.inMilliseconds,
             color: Colors.orange,
           ),
         ),

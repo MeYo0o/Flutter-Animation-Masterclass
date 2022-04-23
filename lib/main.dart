@@ -79,7 +79,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_animations_masterclass/pages/ep11_to_ep/stopwatch.dart';
+import 'package:flutter_animations_masterclass/pages/ep11_to_ep24/stopwatch.dart';
 
 void main() {
   runApp(const MyApp());

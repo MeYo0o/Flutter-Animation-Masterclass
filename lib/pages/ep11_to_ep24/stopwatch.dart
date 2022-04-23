@@ -2,8 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_animations_masterclass/pages/ep11_to_ep/elapsed_time_text.dart';
-import 'package:flutter_animations_masterclass/pages/ep11_to_ep/stop_watch_renderer.dart';
 
 class MeYoStopWatch extends StatefulWidget {
   const MeYoStopWatch({Key? key}) : super(key: key);
