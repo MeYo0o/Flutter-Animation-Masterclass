@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import 'stop_watch_renderer.dart';
+
 class MeYoStopWatch extends StatefulWidget {
   const MeYoStopWatch({Key? key}) : super(key: key);
 
@@ -50,9 +52,10 @@ class _MeYoStopWatchState extends State<MeYoStopWatch> with SingleTickerProvider
             color: Colors.indigo,
           ),
         ),
-        // StopwatchRenderer(
-        //   elapsedTime: _elapsed,
-        // ),
+        StopwatchRenderer(
+          elapsedTime: _elapsed,
+          radius: 20,
+        ),
       ],
     );
   }

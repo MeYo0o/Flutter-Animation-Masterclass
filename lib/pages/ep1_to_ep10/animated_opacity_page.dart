@@ -37,7 +37,7 @@ class AnimatedOpacityPage extends StatefulWidget {
   const AnimatedOpacityPage({Key? key}) : super(key: key);
 
   @override
-  createState() => AnimatedOpacityPageState();
+  AnimatedOpacityPageState createState() => AnimatedOpacityPageState();
 }
 
 class AnimatedOpacityPageState extends State<AnimatedOpacityPage> {
