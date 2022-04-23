@@ -19,11 +19,15 @@ class _MeYoStopWatchState extends State<MeYoStopWatch> with SingleTickerProvider
   @override
   void initState() {
     super.initState();
-    _ticker = createTicker((elapsed) {
-      setState(() {
-        _elapsed = elapsed;
-      });
-    });
+    _ticker = createTicker(
+      (elapsed) {
+        setState(
+          () {
+            _elapsed = elapsed;
+          },
+        );
+      },
+    );
 
     //Tickers have to be started explicitly
     _ticker.start();
